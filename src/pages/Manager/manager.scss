@@ -1,0 +1,348 @@
+﻿.header{
+ 
+    
+  
+}
+.Listcate {
+    min-height: 200px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .cateItem {
+        width: 45%;
+        border: 1px solid #fff;
+        padding: 5px;
+        min-height: 100px;
+        display: flex;
+        border-radius: 5px;
+        background: #fff;
+
+        &_left {
+            font-size: 40px;
+            background-color: #1783f0;
+            color: #fff;
+            line-height: 100px;
+            height: 30%;
+            border-radius: 5px;
+            padding: 2px 22px;
+        }
+
+        &_right {
+            padding: 0 20px;
+            font-size: 15px;
+
+            p {
+                font-weight: 700;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .cateItem:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+}
+.tab-container {
+    margin: 20px;
+    padding: 20px;
+    background: #fff;
+}
+.nameCompany {
+    padding: 20px;
+}
+.button {
+    display: flex;
+    gap: 10px;
+}
+
+/*Recrui*/
+
+.recurItem {
+    margin: 20px 0;
+    border-top: solid 1px #ccc;
+    padding: 20px;
+    border-bottom: solid 1px #ccc;
+
+    &_tag {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #B1D5FA;
+        margin: 0 5px;
+        color: #0F57A0;
+        font-weight: 700;
+    }
+
+    &_btns {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &_btns &_btn {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #1783f0;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: none;
+    }
+
+    &_btns &_btn:hover {
+        border: 1px solid #1783f0;
+    }
+}
+.status_active {
+    background-color: #B1D5FA;
+    padding: 5px 9px;
+    border-radius: 13px;
+    color: #5436BB;
+    font-weight: 600;
+}
+.status_inactive {
+    background-color: #F5C6CB;
+    padding: 5px 9px;
+    border-radius: 13px;
+    color: #721C24;
+    font-weight: 600;
+}
+/*aplicant*/
+/* Container chứa danh sách ứng viên */
+.applicants-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card cho mỗi ứng viên */
+.applicant-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.applicant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #3b82f6;
+}
+
+/* Tiêu đề tên ứng viên */
+.applicant-card h2 {
+    color: #1f2937;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.applicant-card h2::before {
+    content: "👤";
+    font-size: 20px;
+}
+
+/* Styling cho các thông tin */
+.applicant-card p {
+    margin: 8px 0;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Icons cho các thông tin khác nhau */
+.applicant-card p:nth-of-type(1)::before { /* Vị trí ứng tuyển */
+    content: "💼";
+    font-size: 16px;
+}
+
+.applicant-card p:nth-of-type(2)::before { /* Số điện thoại */
+    content: "📱";
+    font-size: 16px;
+}
+
+.applicant-card p:nth-of-type(3)::before { /* Địa chỉ */
+    content: "📍";
+    font-size: 16px;
+}
+
+.applicant-card p:nth-of-type(4)::before { /* Email */
+    content: "✉️";
+    font-size: 16px;
+}
+
+.applicant-card p:nth-of-type(5)::before { /* Mô tả */
+    content: "📝";
+    font-size: 16px;
+}
+
+.applicant-card p:nth-of-type(6)::before { /* Ngày tạo */
+    content: "📅";
+    font-size: 16px;
+}
+
+/* Styling đặc biệt cho mô tả */
+.applicant-card p:nth-of-type(5) {
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    font-style: italic;
+    margin: 12px 0;
+}
+
+/* Styling cho trạng thái đọc/chưa đọc */
+.applicant-card p:nth-of-type(7) {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+}
+
+/* Trạng thái đã đọc */
+.applicant-card p[style*="green"] {
+    background: #dcfce7;
+    color: #16a34a !important;
+    border: 1px solid #16a34a;
+}
+
+.applicant-card p[style*="green"]::before {
+    content: "✅";
+}
+
+/* Trạng thái chưa đọc */
+.applicant-card p[style*="red"] {
+    background: #fee2e2;
+    color: #dc2626 !important;
+    border: 1px solid #dc2626;
+}
+
+.applicant-card p[style*="red"]::before {
+    content: "❌";
+}
+
+/* Styling cho button */
+.applicant-card .ant-btn {
+    margin-top: 16px;
+    height: 40px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.applicant-card .ant-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.applicant-card .ant-btn::before {
+   
+    font-size: 16px;
+}
+
+/* Thông báo không có ứng viên */
+.no-applicants {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+    font-size: 18px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 2px dashed #d1d5db;
+}
+
+.no-applicants::before {
+    content: "📋";
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .applicants-container {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .applicant-card {
+        padding: 16px;
+    }
+
+    .applicant-card h2 {
+        font-size: 20px;
+    }
+
+    .applicant-card p {
+        font-size: 13px;
+    }
+
+    .applicant-card p:nth-of-type(5) {
+        padding: 8px;
+    }
+}
+
+/* Animation cho card khi load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.applicant-card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Thêm số thứ tự cho mỗi card */
+.applicant-card::before {
+    content: counter(applicant-counter);
+    counter-increment: applicant-counter;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #3b82f6;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.applicants-container {
+    counter-reset: applicant-counter;
+}
+/*end aplicant*/

@@ -1,0 +1,168 @@
+.company {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    min-height: 90vh;
+
+    &__content {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 1.2rem;
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    &__item {
+        cursor: pointer;
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        &--mota {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        &--address {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            font-style: italic;
+        }
+    }
+    // Responsive adjustments
+    @media (max-width: 768px) {
+        &__content {
+            h2 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        &__list {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+// .company__item {
+.company-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    min-height:90vh;
+    
+    &__header {
+        margin-bottom: 20px;
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        &__address {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        &__description {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+    }
+
+    &__details {
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin-bottom: 10px;
+
+            strong {
+                color: #2c3e50;
+                font-weight: 600;
+            }
+        }
+    }
+    // Responsive adjustments
+    @media (max-width: 768px) {
+        padding: 15px;
+
+        &__header {
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            &__address {
+                font-size: 0.85rem;
+            }
+
+            &__description {
+                font-size: 0.95rem;
+            }
+        }
+
+        &__details {
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+        }
+    }
+}

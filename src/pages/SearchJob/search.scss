@@ -1,0 +1,19 @@
+.search {
+    display: flex;
+    margin: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+
+
+    &_location {
+        margin: 0 10px;
+    }
+
+    button {
+        height: 30px !important;
+    }
+}
+.search-wrapper {
+    padding: 20px;
+    min-height: 90vh;
+}
