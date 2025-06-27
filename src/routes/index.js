@@ -26,6 +26,7 @@ import Add_Recruitment from "../pages/Manager/Recruitment/Add_Recruitment";
 import Aplicant from "../pages/Manager/Aplicant/index";
 import Home_aplicant from "../pages/Manager/Aplicant/Home_aplicant";
 import AplicantDetail from "../pages/Manager/Aplicant/AplicantDetail";
+import AplicantList from "../pages/Manager/Aplicant/AplicantList";
 //import Login from "../pages/Login";
 //import Sigup from "../pages/Sigup";
 
@@ -158,6 +159,11 @@ export const routes = [
                     {
                         path: ":aplicantId",
                         element: <AplicantDetail />
+
+                    },
+                    {
+                        path: "list/:idJob",
+                        element: <AplicantList />
 
                     }
                 ]

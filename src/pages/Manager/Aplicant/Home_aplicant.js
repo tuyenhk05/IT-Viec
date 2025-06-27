@@ -65,13 +65,13 @@ function Home_aplicant() {
                                   <p>{applicant.description}</p>
                                   <p>Ngày tạo: {applicant.createAt}</p>
                                   {
-                                      applicant.status === true ? (
+                                      applicant.statusRead === true ? (
                                           <p style={{ color: 'green', display: 'block' }}>Đã đọc</p>
                                       ) : (
                                               <p style={{ color: 'red', display: 'block' }}>Chưa đọc</p>
                                       )
                                   }
-                                  <Button type="primary" icon={<EyeOutlined />} style={{ display: 'inline',marginRight:10 }} onClick={() => {navigate(`/aplicant/${applicant.id}`) }}>Xem chi tiết</Button>
+                                  <Button type="primary" icon={<EyeOutlined />} style={{ display: 'inline', marginRight: 10 }} onClick={() => { navigate(`/aplicant/${applicant.id}`) }}>Xem chi tiết</Button>
                                   <Popconfirm
                                       title="Xóa CV này"
                                       description="Bạn có chắc chắn muốn xóa?"

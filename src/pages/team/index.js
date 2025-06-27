@@ -6,7 +6,7 @@ function Team() {
     return (
         <>
             <header>
-                <div className="container">
+                <div className="container team">
                     <h1>Đội Ngũ Vận Hành IT-Vie</h1>
                     <p>Gặp gỡ những người đứng sau thành công của IT-Vie</p>
                 </div>
@@ -48,7 +48,7 @@ function Team() {
                 </div>
             </section>
 
-            <footer>
+            <footer class="footer_team">
                 <div className="container">
                     <p>© 2025 IT-Vie. Tất cả quyền được bảo lưu.</p>
                     <div className="links">

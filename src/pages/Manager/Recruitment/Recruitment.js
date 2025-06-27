@@ -79,7 +79,7 @@ function Recruitment() {
 						</p>
 						<p className="recurItem_date">Ngày đăng: {item.createAt}</p>
 						<div className="recurItem_btns">
-							<Button type="default" icon={< EyeOutlined/> } className="recurItem_btn">Xem ứng viên</Button>
+							<Button type="default" icon={< EyeOutlined />} onClick={() => {navigate(`list/${item.id}`) } } className="recurItem_btn">Xem ứng viên</Button>
 							<Button type="primary" icon={<FormOutlined />} className="recurItem_btn" onClick={handleEdit(item.id) }>Chỉnh sửa</Button>
 							<Popconfirm
 								title="Xóa thông tin job này"
