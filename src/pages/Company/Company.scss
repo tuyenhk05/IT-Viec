@@ -1,9 +1,23 @@
-﻿.company {
+﻿@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.company {
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
     background-color: #f8f9fa;
     min-height: 90vh;
+    animation: alternate fadeInUp 0.5s ease-in-out;
 
     &__content {
         text-align: center;

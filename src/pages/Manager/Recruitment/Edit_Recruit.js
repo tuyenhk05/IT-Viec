@@ -8,6 +8,7 @@ import { getalltags } from '../../../services/dataTags';
 import { putjob } from '../../../services/datajob';
 import { getallcity } from '../../../services/datacity';
 import { FormOutlined, CloseOutlined } from '@ant-design/icons';
+import { getCookie } from '../../../helpers/cookie'; 
 
 function EditRecrui() {
     const { recruitmentId } = useParams();
@@ -16,6 +17,7 @@ function EditRecrui() {
     const [city, setCity] = useState([]);
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
+    const user = getCookie("companyToken");
 
     const success = () => {
         messageApi.open({
@@ -86,64 +88,74 @@ function EditRecrui() {
 
     return (
         <>
-        { contextHolder }
-        <div className="container">
-            <h2>Chỉnh sửa thông tin tuyển dụng</h2>
-            <Form
-                labelCol={{ span: 20 }}
-                wrapperCol={{ span: 22 }}
-                style={{ maxWidth: 2200, color: '#000' }}
-                layout="vertical"
-                initialValues={initialValues}
-                size="large"
-                onFinish={handleSubmit}
-            >
-                <Form.Item label="Tên công việc" name="jobName" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                    <Input />
-                </Form.Item>
+            {
+                user ? (
+                    <>
+                        {contextHolder}
+                        <div className="container">
+                            <h2>Chỉnh sửa thông tin tuyển dụng</h2>
+                            <Form
+                                labelCol={{ span: 20 }}
+                                wrapperCol={{ span: 22 }}
+                                style={{ maxWidth: 2200, color: '#000' }}
+                                layout="vertical"
+                                initialValues={initialValues}
+                                size="large"
+                                onFinish={handleSubmit}
+                            >
+                                <Form.Item label="Tên công việc" name="jobName" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Input />
+                                </Form.Item>
 
-                <Form.Item label="Mô tả" name="description" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                    <Input />
-                </Form.Item>
+                                <Form.Item label="Mô tả" name="description" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Input />
+                                </Form.Item>
 
-                <Form.Item label="Lương" name="salary" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                    <Input />
-                </Form.Item>
+                                <Form.Item label="Lương" name="salary" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Input />
+                                </Form.Item>
 
-                <Form.Item label="Địa chỉ" name="city" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                    <Select
-                        mode="multiple"
-                        allowClear
-                        style={{ width: '100%' }}
-                        placeholder="Please select"
-                        options={city}
-                    />
-                </Form.Item>
-                <Form.Item label="Trạng thái hoạt động" name="status" valuePropName="checked">
-                    <Checkbox
-                        onChange={onChange}
-                        style={{ transform: 'scale(1.5)', marginLeft: 10 }}
-                    />
-                </Form.Item>
-                <Form.Item label="Tags" name="tags" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                    <Select
-                        mode="multiple"
-                        allowClear
-                        style={{ width: '100%' }}
-                        placeholder="Please select"
-                        onChange={handleChange}
-                        options={tags}
-                    />
-                </Form.Item>
+                                <Form.Item label="Địa chỉ" name="city" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder="Please select"
+                                        options={city}
+                                    />
+                                </Form.Item>
+                                <Form.Item label="Trạng thái hoạt động" name="status" valuePropName="checked">
+                                    <Checkbox
+                                        onChange={onChange}
+                                        style={{ transform: 'scale(1.5)', marginLeft: 10 }}
+                                    />
+                                </Form.Item>
+                                <Form.Item label="Tags" name="tags" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder="Please select"
+                                        onChange={handleChange}
+                                        options={tags}
+                                    />
+                                </Form.Item>
 
-                    <Button type="primary" htmlType="submit" icon={<FormOutlined />}>
-                    Cập nhật
-                </Button>
-                    <Button type="primary" icon={<CloseOutlined />} style={{ marginLeft: 10 }} onClick={handleCancel}>
-                    Hủy
-                </Button>
-            </Form>
-            </div>
+                                <Button type="primary" htmlType="submit" icon={<FormOutlined />}>
+                                    Cập nhật
+                                </Button>
+                                <Button type="primary" icon={<CloseOutlined />} style={{ marginLeft: 10 }} onClick={handleCancel}>
+                                    Hủy
+                                </Button>
+                            </Form>
+                        </div>
+                    </>
+                ) : (
+                        <>
+                            Bạn không có quyền truy cập vào trang này. Vui lòng đăng nhập với tài khoản quản lý.
+                            </>
+                )
+            }
         </>
     );
 }

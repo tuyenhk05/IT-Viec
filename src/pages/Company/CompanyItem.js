@@ -1,9 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getcompany } from '../../services/datacompany'; // Adjust the import path as necessary
+import { useNavigate } from 'react-router-dom'; 
 function CompanyItem() {
     const { companyId } = useParams();
     const [company, setCompany] = useState({});
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchCompany = async () => {
             try {
@@ -20,6 +22,10 @@ function CompanyItem() {
     return (
         <>
             <div className="company-item">
+                <div className="btn-back" onClick={() => { navigate(-1) }}>← Quay lại</div>
+                <br />
+
+
                 <div className="company-item__header">
                     <h2>{company.companyName}</h2>
                     <p className="company-item__address">{company.address}</p>

@@ -12,19 +12,7 @@ $shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
 $border-radius: 12px;
 $transition: all 0.3s ease;
 
-// Reset and base styles
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    color: $text-primary;
-    overflow-x: hidden;
-}
 
 // Header Section
 .headerr {
@@ -57,7 +45,7 @@ body {
     }
 
     &__title {
-        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-size: clamp(1.5rem, 5vw, 4rem);
         font-weight: 800;
         color: $text-light;
         margin-bottom: 1.5rem;

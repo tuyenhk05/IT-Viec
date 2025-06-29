@@ -4,10 +4,12 @@ import { getjob } from '../../services/datajob';
 import { getcompany } from '../../services/datacompany';
 import { postcv } from '../../services/dataCv'; // Import postcv function
 import './Upload.scss';  // Import CSS file for styling
-import {  message } from 'antd';
+import { message } from 'antd';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 const CVUpload = () => {
     const { jobId } = useParams();  // Lấy jobId từ URL
     const [messageApi, contextHolder] = message.useMessage();
+    const navigate = useNavigate();  // Hook để điều hướng
     const [cvData, setCvData] = useState({
         id: Date.now(),
         idCompany: '',
@@ -89,6 +91,9 @@ const CVUpload = () => {
         } catch (error) {
             console.error('Error submitting CV:', error);
         }
+        setTimeout(() => {
+            navigate(-1);
+        }, 2000); // Quay lại trang trước sau 2 giây
     };
 
     // Nếu dữ liệu công việc hoặc công ty chưa có, hiển thị "Loading..."

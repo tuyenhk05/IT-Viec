@@ -13,6 +13,7 @@ function Home_aplicant() {
     const [messageApi, contextHolder] = message.useMessage();
     const [reload, setReload] = useState(false);
     const navigate = useNavigate();
+    const user = getCookie("companyToken");
 
     console.log('Company ID:', idCompany);
     useEffect(() => {
@@ -48,49 +49,61 @@ function Home_aplicant() {
    
   return (
       <>
-          {contextHolder}
-          <div className="container">
-              <h1>Quản lý CV</h1>
-              {
-                  aplicants.length > 0 ? (
-                      aplicants.map((applicant, applicantIndex) => {
-                          const job = jobs.find(job => job.id === applicant.idJob);
-                          return job ? (
-                              <div key={applicantIndex} className="applicant-card">
-                                  <h2>{applicant.name}</h2>
-                                  <p>Vị trí ứng tuyển: {job.name}</p>
-                                  <p>Số điện thoại: {applicant.phone}</p>
-                                  <p>Địa chỉ: {applicant.city}</p>
-                                  <p>Email: {applicant.email}</p>
-                                  <p>{applicant.description}</p>
-                                  <p>Ngày tạo: {applicant.createAt}</p>
-                                  {
-                                      applicant.statusRead === true ? (
-                                          <p style={{ color: 'green', display: 'block' }}>Đã đọc</p>
-                                      ) : (
-                                              <p style={{ color: 'red', display: 'block' }}>Chưa đọc</p>
-                                      )
-                                  }
-                                  <Button type="primary" icon={<EyeOutlined />} style={{ display: 'inline', marginRight: 10 }} onClick={() => { navigate(`/aplicant/${applicant.id}`) }}>Xem chi tiết</Button>
-                                  <Popconfirm
-                                      title="Xóa CV này"
-                                      description="Bạn có chắc chắn muốn xóa?"
-                                      onConfirm={() => { confirm(applicant.id) }}
-                                      onCancel={cancel}
-                                      okText="Xóa"
-                                      placement="topRight"
-                                      cancelText="Hủy"
-                                  >
-                                      <Button type="danger" style={{ display: 'inline' }} icon={<DeleteOutlined /> } className="button_del">Xóa</Button>
-                                  </Popconfirm>
-                              </div>
-                          ) : null;
-                      })
-                  ) : (
-                      <p>Không có ứng viên nào.</p>
+          {
+              user ? (
+                  <>
+                      {contextHolder}
+                      <div className="container">
+                          <h1>Quản lý CV</h1>
+                          <br />
+                          {
+                              aplicants.length > 0 ? (
+                                  aplicants.map((applicant, applicantIndex) => {
+                                      const job = jobs.find(job => job.id === applicant.idJob);
+                                      return job ? (
+                                          <div key={applicantIndex} className="applicant-card">
+                                              <h2>{applicant.name}</h2>
+                                              <p>Vị trí ứng tuyển: {job.name}</p>
+                                              <p>Số điện thoại: {applicant.phone}</p>
+                                              <p>Địa chỉ: {applicant.city}</p>
+                                              <p>Email: {applicant.email}</p>
+                                              <p>{applicant.description}</p>
+                                              <p>Ngày tạo: {applicant.createAt}</p>
+                                              {
+                                                  applicant.statusRead === true ? (
+                                                      <p style={{ color: 'green', display: 'block' }}>Đã đọc</p>
+                                                  ) : (
+                                                      <p style={{ color: 'red', display: 'block' }}>Chưa đọc</p>
+                                                  )
+                                              }
+                                              <Button type="primary" icon={<EyeOutlined />} style={{ display: 'inline', marginRight: 10 }} onClick={() => { navigate(`/aplicant/${applicant.id}`) }}>Xem chi tiết</Button>
+                                              <Popconfirm
+                                                  title="Xóa CV này"
+                                                  description="Bạn có chắc chắn muốn xóa?"
+                                                  onConfirm={() => { confirm(applicant.id) }}
+                                                  onCancel={cancel}
+                                                  okText="Xóa"
+                                                  placement="topRight"
+                                                  cancelText="Hủy"
+                                              >
+                                                  <Button type="danger" style={{ display: 'inline' }} icon={<DeleteOutlined />} className="button_del">Xóa</Button>
+                                              </Popconfirm>
+                                          </div>
+                                      ) : null;
+                                  })
+                              ) : (
+                                  <p>Không có ứng viên nào.</p>
+                              )
+                          }
+                      </div>
+                  </>
+              ) :
+                  (
+                      <>
+                          Bạn không có quyền truy cập vào trang này.
+                      </>
                   )
-              }
-          </div>
+          }
       </>
   );
 }

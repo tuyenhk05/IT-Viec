@@ -21,7 +21,6 @@ import { islogout } from '../../action/login'; // Import action to set login sta
 const { Header, Sider, Content } = Layout;
 function Layoutt() {
     const dispatch = useDispatch();
-
     const isLogin = useSelector(state => state.loginReducer); // Lấy trạng thái đăng nhập từ Redux
 
     useEffect(() => {
@@ -35,7 +34,6 @@ function Layoutt() {
         }
         
     }, [isLogin.isLogin]); 
-
     const [collapsed, setCollapsed] = useState(false);
     const location = useLocation();  // Dùng useLocation để lấy đường dẫn hiện tại
 
@@ -174,12 +172,12 @@ function Layoutt() {
     return (
         <Layout>
             <Header className="header">
-                <div className={collapsed ? "header_logo header_logo-active" : "header_logo"}>
+                <div className={window.innerWidth >= 560 && collapsed ? "header_logo header_logo-active" : "header_logo"}>
                    <Link to="/"> IT-Vie</Link>
                 </div>
                 <div className="header_nav">
                     <div className="header_nav-left" onClick={() => { setCollapsed(!collapsed) }}>
-                        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                        {window.innerWidth >= 560 ?  collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined /> : ("")}
                     </div>
                     {
                         isLogin.isLogin ? (
@@ -192,7 +190,7 @@ function Layoutt() {
                             </>
                         ) : (
                                 <div className="header_nav-right">
-                                    <span><UserOutlined /> <Link to="login">Đăng nhập </Link> <div>| </div> <Link to="register">Đăng kí</Link></span>
+                                    <span><UserOutlined /> <Link to="login">Đăng nhập </Link></span>
                                 </div>)
                     }
                 </div>
@@ -200,7 +198,7 @@ function Layoutt() {
            
             <Layout>
 
-                <Sider className="sider" width="20%" collapsed={collapsed}>
+                <Sider className="sider" width="20%" collapsed={window.innerWidth <= 560 ? true : collapsed}>
                    
                     <Menu
                         mode="inline"

@@ -73,6 +73,10 @@
     display: flex;
     gap: 10px;
 }
+.dasboard {
+    animation: alternate fadeIn 0.7s ease-in-out;
+    margin:clamp(5px,2vw,15px);
+}
 
 /*Recrui*/
 
@@ -662,3 +666,57 @@ $spacing-xl: 3rem;
     }
 }
 /* end scss aplicantDetails*/
+@media (max-width: 360px) {
+    .Listcate {
+        display: block;
+
+        .cateItem {
+            width: 100%;
+            margin-bottom: 20px;
+            min-height: 50px;
+
+            &_left {
+                font-size: 32px;
+                background-color: #1783f0;
+                color: #fff;
+                line-height: 78px;
+                height: 30%;
+                border-radius: 5px;
+                padding: 1px 16px;
+            }
+        }
+    }
+
+    .container{
+        padding:5px;
+    }
+    .recurItem {
+        &_name {
+            font-size: 16px;
+        }
+
+        &_tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        &_tag {
+            padding: 4px 7px;
+            border-radius: 5px;
+            background-color: #B1D5FA;
+            /* margin: 0 5px; */
+            color: #0F57A0;
+            font-weight: 700;
+        }
+
+        &_btns {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+
+}

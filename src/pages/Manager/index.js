@@ -1,8 +1,21 @@
-import { Outlet } from "react-router-dom";
+﻿import { Outlet } from "react-router-dom";
+import { getCookie } from "../../helpers/cookie";
 function Manager() {
+    const user = getCookie("companyToken");
   return (
       <>
-          <Outlet />
+          {
+              user ? (
+                  <>
+                      <Outlet />
+                  </>
+              ):(
+                      <>
+                          Bạn không có quyền truy cập vào trang này. Vui lòng đăng nhập với tài khoản quản lý.
+                  </>
+              )
+          }
+          
       </>
   );
 }

@@ -1,50 +1,45 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { getallnew } from "../../services/datanew";  // Import API lấy tin tức
+import { getallnew } from "../../services/datanew";
 import { Pagination } from 'antd';
-import NewsItem from './CommunityList';  // Component con để hiển thị một tin tức
+import NewsItem from './CommunityList';
 import "./comunity.scss";
 
 function CommunityAll() {
     const [newsList, setNewsList] = useState([]);
-    const [newsPage, setNewsPage] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 6;
 
-
-    // Hàm gọi API lấy tin tức khi trang được load
     useEffect(() => {
         const fetchData = async () => {
-            const response = await getallnew();  // Gọi API lấy tin tức
-            setNewsPage(response);
-            setNewsList(response);  // Set danh sách tin tức
+            const response = await getallnew();  // Lấy tất cả dữ liệu
+            setNewsList(response);
         }
         fetchData();
     }, []);
 
-
-    // Hàm xử lý phân trang
-    const handleChange = (page) => {
-        const fetchData = async () => {
-            const response = await getallnew(page);  // Lấy dữ liệu tin tức theo trang
-            setNewsPage(response);
-        }
-        fetchData();
-    }
+    // Tính toán các phần tử cho trang hiện tại
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const newsPage = newsList.slice(startIndex, endIndex);
 
     return (
         <>
             <div className="community-container">
-                <h1 className="text-3xl font-bold mb-4">Trang Cộng Đồng</h1>
-
-            
-                
-
+                <h1 className="text-3xl font-bold mb-4" style={{margin:20} }>Trang Cộng Đồng</h1>
 
                 <div className="news-list">
                     {newsPage.map((item, index) => (
-                        <NewsItem item={item} key={index} />  // Component con để hiển thị tin tức
+                        <NewsItem item={item} key={index} />
                     ))}
                 </div>
 
-                <Pagination defaultCurrent={1} align="center" total={newsList.length} defaultPageSize={6} onChange={handleChange} />
+                <Pagination
+                    current={currentPage}
+                    pageSize={pageSize}
+                    total={newsList.length}
+                    onChange={(page) => setCurrentPage(page)}
+                    style={{ textAlign: 'center', marginTop: '20px' }}
+                />
             </div>
 
             <footer className="footer">

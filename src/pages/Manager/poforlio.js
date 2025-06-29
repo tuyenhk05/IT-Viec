@@ -10,7 +10,7 @@ function Profile() {
     const [profileData, setProfileData] = useState(null);
     const [componentDisabled, setComponentDisabled] = useState(true);
     const [messageApi, contextHolder] = message.useMessage();
-
+    const user = getCookie("companyToken");
     const success = () => {
         messageApi.open({
             type: 'success',
@@ -72,12 +72,16 @@ function Profile() {
   
     return (
         <>
-            {contextHolder}
-            <div className="container">
+            {
+                user ?
+                    (
+                        <>
+                        { contextHolder }
+                        < div className="container">
             <h2>Chỉnh sửa thông tin công ty</h2>
-                {
-                    componentDisabled ? (
-                        <Button type="primary" icon={< FormOutlined/> } onClick={() => { setComponentDisabled(false) }}>Chỉnh sửa</Button>
+            {
+                componentDisabled ? (
+                    <Button type="primary" icon={< FormOutlined />} onClick={() => { setComponentDisabled(false) }}>Chỉnh sửa</Button>
                 )
                     :
                     (
@@ -92,7 +96,7 @@ function Profile() {
                 layout="vertical"
                 disabled={componentDisabled}
                 initialValues={
-                   values
+                    values
                 }
                 key={componentDisabled.toString()}
                 size="large"
@@ -142,23 +146,30 @@ function Profile() {
                     componentDisabled ?
                         (
                             ""
-                        ):
-                            (
+                        ) :
+                        (
                             <><div className="button">
                                 <div className="button_1">
-                                        <Button type="primary" htmlType="submit" icon={<SaveOutlined /> }  >Lưu</Button>
+                                    <Button type="primary" htmlType="submit" icon={<SaveOutlined />}  >Lưu</Button>
                                 </div>
                                 <div className="button_2">
-                                        <Button type="primary" icon={<CloseOutlined />} onClick={ handleCancel}>Hủy</Button>
+                                    <Button type="primary" icon={<CloseOutlined />} onClick={handleCancel}>Hủy</Button>
                                 </div>
                             </div>
-                               
-                                </>
-                      )
-                     }
-               
-                </Form >
-            </div>
+
+                            </>
+                        )
+                }
+
+            </Form >
+                            </div >
+        </>
+                    ):
+                        (
+                                  <>      Bạn không có quyền truy cập vào trang này. Vui lòng đăng nhập với tài khoản quản lý.</>
+                )
+                
+            }
         </>
     );
 }

@@ -12,6 +12,7 @@ function Add_Recruitment() {
     const [city, setCity] = useState([]);
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
+    const user = getCookie("companyToken");
     useEffect(() => {
         const fetchData = async () => {
             const tagsArray = await getalltags();
@@ -79,63 +80,73 @@ function Add_Recruitment() {
 
     return (
         <>
-            {contextHolder}
-            <div className="container">
-                <h2>Thêm công việc mới</h2>
-                <Form
-                    labelCol={{ span: 20 }}
-                    wrapperCol={{ span: 22 }}
-                    style={{ maxWidth: 2200, color: '#000' }}
-                    layout="vertical"
-                    size="large"
-                    onFinish={handleSubmit}
-                >
-                    <Form.Item label="Tên công việc" name="jobName" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                        <Input />
-                    </Form.Item>
+            {
+                user ? (
+                    <>
+                        {contextHolder}
+                        <div className="container">
+                            <h2>Thêm công việc mới</h2>
+                            <Form
+                                labelCol={{ span: 20 }}
+                                wrapperCol={{ span: 22 }}
+                                style={{ maxWidth: 2200, color: '#000' }}
+                                layout="vertical"
+                                size="large"
+                                onFinish={handleSubmit}
+                            >
+                                <Form.Item label="Tên công việc" name="jobName" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Input />
+                                </Form.Item>
 
-                    <Form.Item label="Mô tả" name="description" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                        <Input />
-                    </Form.Item>
+                                <Form.Item label="Mô tả" name="description" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Input />
+                                </Form.Item>
 
-                    <Form.Item label="Lương" name="salary" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                        <Input />
-                    </Form.Item>
+                                <Form.Item label="Lương" name="salary" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Input />
+                                </Form.Item>
 
-                    <Form.Item label="Địa chỉ" name="city" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                        <Select
-                            mode="multiple"
-                            allowClear
-                            style={{ width: '100%' }}
-                            placeholder="Please select"
-                            options={city}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Trạng thái hoạt động" name="status" valuePropName="checked">
-                        <Checkbox
-                            onChange={onChange}
-                            style={{ transform: 'scale(1.5)', marginLeft: 10 }}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Tags" name="tags" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
-                        <Select
-                            mode="multiple"
-                            allowClear
-                            style={{ width: '100%' }}
-                            placeholder="Please select"
-                            onChange={handleChange}
-                            options={tags}
-                        />
-                    </Form.Item>
+                                <Form.Item label="Địa chỉ" name="city" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder="Please select"
+                                        options={city}
+                                    />
+                                </Form.Item>
+                                <Form.Item label="Trạng thái hoạt động" name="status" valuePropName="checked">
+                                    <Checkbox
+                                        onChange={onChange}
+                                        style={{ transform: 'scale(1.5)', marginLeft: 10 }}
+                                    />
+                                </Form.Item>
+                                <Form.Item label="Tags" name="tags" rules={[{ required: true, message: 'Vui lòng nhập ô này !' }]}>
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder="Please select"
+                                        onChange={handleChange}
+                                        options={tags}
+                                    />
+                                </Form.Item>
 
-                    <Button type="primary" htmlType="submit" icon={<PlusOutlined /> }>
-                        Tạo
-                    </Button>
-                    <Button type="primary" icon={<CloseOutlined />} style={{ marginLeft: 10 }} onClick={handleCancel}>
-                        Hủy
-                    </Button>
-                </Form>
-            </div>
+                                <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
+                                    Tạo
+                                </Button>
+                                <Button type="primary" icon={<CloseOutlined />} style={{ marginLeft: 10 }} onClick={handleCancel}>
+                                    Hủy
+                                </Button>
+                            </Form>
+                        </div>
+                    </>
+                ) : (
+                        <>
+                            Bạn không có quyền truy cập vào trang này.
+                        </>
+                )
+            }
         </>
     );
 }

@@ -27,8 +27,12 @@ function Jobitem() {
 
     return (
         <>
+        
             <div className="container">
                 <div className="job-item">
+                    <div className="btn-back" onClick={() => { navigate(-1) }}>← Quay lại</div>
+                    <br />
+
                     <h2>{jobitem.name}</h2>
                     <p>Công ty : {company.companyName}</p>
                     <p>Giới thiệu : {company.description}</p>

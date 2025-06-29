@@ -30,7 +30,7 @@
         margin: 0 10px;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
+        font-size: clamp(12px,2vw,20px);
         font-weight: 600;
         transition: all 0.3s ease;
 
@@ -92,3 +92,30 @@
     background-color: #F7F7F7;
 }
 
+@media( max-width:360px) {
+    .header {
+        padding: 0;
+
+        &_logo {
+            display: block;
+            margin:0;
+            width:18%;
+        }
+
+        &_nav {
+            padding: 0;
+
+            &-right span {
+                gap: 5px;
+                font-size: 12px;
+                margin-right: 5px;
+            }
+        }
+    }
+    .sider {
+        width: 18% !important;
+        max-width: 18% !important;
+        min-width: 18% !important;
+    }
+    
+}    
