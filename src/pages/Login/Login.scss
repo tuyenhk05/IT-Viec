@@ -3,10 +3,25 @@
     height: 100vh;
     background-size: cover;
     background-position: center;
-    
+
+    form {
+        animation: fadeInUp 1s ease-in-out;
+    }
 }
 .back_home {
     padding: 20px;
     font-size: 16px;
     font-weight: 600;
+}
+// Animations
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
