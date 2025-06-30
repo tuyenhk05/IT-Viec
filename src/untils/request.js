@@ -1,4 +1,4 @@
-const API = "http://localhost:8081";
+const API = "https://apiitvie.onrender.com/";
 export const get = async (path) => {
     try {
         const response = await fetch(`${API +path}`);
