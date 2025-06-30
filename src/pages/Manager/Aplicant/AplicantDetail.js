@@ -2,6 +2,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { getcv, putcv } from '../../../services/dataCv';
 import { getalljob } from '../../../services/datajob';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Flex } from 'antd';
 import { getCookie } from '../../../helpers/cookie';
 
 function ApplicantDetail() {
@@ -39,7 +41,16 @@ function ApplicantDetail() {
         }
        
     }, [aplicantId]); // Added aplicantId to dependency array
+    if (!data&&jobs.length===0) {
+        return (
+            <>
+                <Flex align="center" gap="middle" className="fullscreen-spin">
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                </Flex>
+            </>
 
+        )
+    };
     // Helper function to find job name
     const getJobName = () => {
         const job = jobs.find(job => job.id === data?.idJob);

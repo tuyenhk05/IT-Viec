@@ -1,12 +1,12 @@
 ﻿/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Checkbox, Select, message } from 'antd';
+import { Form, Input, Button, Checkbox, Select, message, Spin, Flex } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { getalltags } from '../../../services/dataTags';
 import { postjob } from '../../../services/datajob';
 import { getallcity } from '../../../services/datacity';
 import { getCookie } from '../../../helpers/cookie';
-import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import { PlusOutlined, CloseOutlined, LoadingOutlined } from '@ant-design/icons';
 function Add_Recruitment() {
     const [tags, setTags] = useState([]);
     const [city, setCity] = useState([]);
@@ -22,6 +22,16 @@ function Add_Recruitment() {
         };
         fetchData();
     }, []);
+    if (tags.length === 0&& city.length===0) {
+        return (
+            <>
+                <Flex align="center" gap="middle" className="fullscreen-spin">
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                </Flex>
+            </>
+
+        )
+    };
     const success = () => {
         messageApi.open({
             type: 'success',

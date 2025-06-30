@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux'; // Import useSelector để truy cậ
 import { getcompany,putcompany } from '../../services/datacompany';
 import { Button, Form, Input, message } from 'antd';
 import { FormOutlined, SaveOutlined, CloseOutlined } from '@ant-design/icons'; // Import biểu tượng FormOutlined
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Flex } from 'antd'; // Import Spin và Flex từ Ant Design
 
 function Profile() {
     const state = useSelector(state => state.loginReducer); // Lấy trạng thái đăng nhập từ Redux
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState([]);
     const [componentDisabled, setComponentDisabled] = useState(true);
     const [messageApi, contextHolder] = message.useMessage();
     const user = getCookie("companyToken");
@@ -36,9 +38,16 @@ function Profile() {
 
 
     // Đảm bảo rằng profileData đã được cập nhật trước khi render form
-    if (!profileData) {
-        return <div>Loading...</div>; // Hiển thị thông báo khi dữ liệu chưa có
-    }
+    if (!profileData.companyName) {
+        return (
+            <>
+                <Flex align="center" gap="middle" className="fullscreen-spin">
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                </Flex>
+            </>
+
+        )
+    };
     const handleSubmit = (values) => {
         setComponentDisabled(true);
         // Gọi API để cập nhật thông tin công ty với giá trị từ form

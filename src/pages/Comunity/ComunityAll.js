@@ -2,6 +2,8 @@
 import { getallnew } from "../../services/datanew";
 import { Pagination } from 'antd';
 import NewsItem from './CommunityList';
+import { Spin, Flex } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import "./comunity.scss";
 
 function CommunityAll() {
@@ -24,7 +26,18 @@ function CommunityAll() {
 
     return (
         <>
-            <div className="community-container">
+            {
+                newsList.length === 0 ?
+                    (
+                        <>
+                            <Flex align="center" gap="middle" className="fullscreen-spin">
+                                <Spin indicator={<LoadingOutlined spin />} size="large" />
+                            </Flex>
+                        </>
+                    ):
+                    (
+                        <>
+                            <div className="community-container">
                 <h1 className="text-3xl font-bold mb-4" style={{margin:20} }>Trang Cộng Đồng</h1>
 
                 <div className="news-list">
@@ -52,6 +65,10 @@ function CommunityAll() {
                     </div>
                 </div>
             </footer>
+                </>
+                    )
+            }
+           
         </>
     );
 }

@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { getCookie } from '../../../helpers/cookie'; // Import hàm getCookie để lấy cookie
 import { delcv, getallcv } from '../../../services/dataCv';
 import { getalljob } from '../../../services/datajob';
-import { Button, Popconfirm, message } from 'antd'; 
-import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { Button, Popconfirm, message, Spin, Flex } from 'antd'; 
+
+import { DeleteOutlined, EyeOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom'; 
 function Home_aplicant() {
     const [aplicants, setApplicants] = useState([]);
@@ -15,7 +16,6 @@ function Home_aplicant() {
     const navigate = useNavigate();
     const user = getCookie("companyToken");
 
-    console.log('Company ID:', idCompany);
     useEffect(() => {
         const fetchApplicants = async () => {
             try {
@@ -30,6 +30,16 @@ function Home_aplicant() {
         };
         fetchApplicants();
     }, [reload]);
+    if (aplicants.length === 0 && jobs.length === 0) {
+        return (
+            <>
+                <Flex align="center" gap="middle" className="fullscreen-spin">
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                </Flex>
+            </>
+
+        )
+    };
     const success = () => {
         messageApi.open({
             type: 'error',

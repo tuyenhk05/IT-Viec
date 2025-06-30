@@ -2,6 +2,8 @@
 import { getallcompany } from '../../services/datacompany'; // Adjust the import path as necessary
 import './Company.scss'; // Adjust the import path as necessary
 import { useNavigate } from 'react-router-dom'; 
+import { Spin, Flex } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 function Company() {
     const [company, setCompany] = useState([]);
     const navigate = useNavigate();
@@ -23,7 +25,16 @@ function Company() {
     }
     return (
         <>
-        <div className="company">
+            {
+                company.length === 0 ? (<>
+                    <Flex align="center" gap="middle" className="fullscreen-spin">
+                        <Spin indicator={<LoadingOutlined spin />} size="large" />
+                    </Flex>
+                    </>
+
+                ) : (
+                    <>
+                     <div className="company">
             <div className="company__content">
               <h2>  Công ty IT tốt nhất Việt Nam 2025</h2>
                <p> Top 30 công ty IT tốt nhất Việt Nam sau đây (15 doanh nghiệp Lớn, 15 doanh nghiệp Vừa và Nhỏ) được ghi nhận mang đến văn hóa doanh nghiệp, phúc lợi, môi trường làm việc, sự quan tâm đến nhân viên và đào tạo xuất sắc nhất trong số 11,000+ công ty IT trên ITviec.
@@ -51,7 +62,11 @@ function Company() {
                         <a href="/privacy" className="footer__link ">Chính Sách Bảo Mật</a>
                     </div>
                 </div>
-            </footer>
+                            </footer>
+            </>
+                )
+            }
+       
         </>
     );
 }

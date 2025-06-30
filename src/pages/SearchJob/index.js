@@ -2,8 +2,9 @@
 import { getalltags } from '../../services/dataTags';
 import { getallcity } from '../../services/datacity';
 import { getalljob } from '../../services/datajob';
-import { Select, Button } from 'antd';
+import { Select, Button,Flex,Spin } from 'antd';
 import Job from '../../pages/AllJob/job';
+import { LoadingOutlined } from '@ant-design/icons';
 import './search.scss';
 
 function SearchJob() {
@@ -69,7 +70,9 @@ function SearchJob() {
     console.log("search:", filteredJobs);
     return (
         <>
-        <div className="search-wrapper">
+            {
+                city.length > 0 && tags.length > 0 ? (<>
+     <div className="search-wrapper">
             <h1>Tìm kiếm job phù hợp với bạn</h1>
             <div className="search">
                 <div className="search_location">
@@ -121,6 +124,19 @@ function SearchJob() {
                     </div>
                 </div>
             </footer>
+
+                </>
+                )
+                    :
+                    (
+                        <>
+                            <Flex align="center" gap="middle" className="fullscreen-spin">
+                                <Spin indicator={<LoadingOutlined spin />} size="large" />
+                            </Flex>
+                        </>
+                    )
+            }
+   
 </>
     );
 }

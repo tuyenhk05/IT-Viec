@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { getCookie } from '../../../helpers/cookie';
 import { getalljob,delJob } from "../../../services/datajob";
 import { Button, message, Popconfirm } from 'antd'; 
-import { PlusOutlined, EyeOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons';
+import { PlusOutlined, EyeOutlined, DeleteOutlined, FormOutlined, LoadingOutlined } from '@ant-design/icons';
+import { Spin, Flex } from 'antd';
 import "./Edit_Recruit"
 function Recruitment() {
 	const [data, setdata] = useState([]);
@@ -25,6 +26,17 @@ function Recruitment() {
 		};
 		fetchData();
 	}, [data]);
+
+	if (data.length===0) {
+		return (
+			<>
+				<Flex align="center" gap="middle" className="fullscreen-spin">
+					<Spin indicator={<LoadingOutlined spin />} size="large" />
+				</Flex>
+			</>
+
+		)
+	};
 	//const reLoadData = async () => {
 	//	const companyId = getCookie('companyId');
 	//	const response = await getalljob();

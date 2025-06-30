@@ -9,6 +9,8 @@ import { putjob } from '../../../services/datajob';
 import { getallcity } from '../../../services/datacity';
 import { FormOutlined, CloseOutlined } from '@ant-design/icons';
 import { getCookie } from '../../../helpers/cookie'; 
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Flex } from 'antd';
 
 function EditRecrui() {
     const { recruitmentId } = useParams();
@@ -38,7 +40,16 @@ function EditRecrui() {
     }, [recruitmentId]);
 
     if (!recruitmentData) {
-        return <div>Loading...</div>; // Hiển thị thông báo khi dữ liệu chưa có
+      
+            return (
+                <>
+                    <Flex align="center" gap="middle" className="fullscreen-spin">
+                        <Spin indicator={<LoadingOutlined spin />} size="large" />
+                    </Flex>
+                </>
+
+            )
+        
     }
 
     const initialValues = {

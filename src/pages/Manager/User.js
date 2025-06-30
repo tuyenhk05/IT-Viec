@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux'; // Import useSelector để truy cậ
 import { ProfileOutlined, TeamOutlined } from '@ant-design/icons';
 import { getalljob } from "../../services/datajob";
 import { getallcv } from "../../services/dataCv";
-import { Row, Col } from 'antd'; 
+import { Row, Col, Spin, Flex } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { Pie, Bar } from '@ant-design/plots';
 
 import "./manager.scss";
@@ -27,7 +28,15 @@ function User() {
         };
         fetchData();
     }, []);
-    
+    if (recruitment.length === 0 && candidates.length === 0) {
+        return (
+            <>
+                <Flex align="center" gap="middle" className="fullscreen-spin">
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                </Flex>
+            </>
+           
+        ) };
     // Đếm số lượng công việc đang hoạt động và ngừng hoạt động
     const statusTrue = recruitment.filter(job => job.status === true).length;
     const statusFalse = recruitment.filter(job => job.status === false).length;
@@ -54,7 +63,6 @@ function User() {
                 
             });
   
-    console.log(data1);
     const config1 = {
         data:data1,
         xField: 'type',

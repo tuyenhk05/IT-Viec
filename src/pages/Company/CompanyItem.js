@@ -2,6 +2,9 @@
 import { useParams } from 'react-router-dom';
 import { getcompany } from '../../services/datacompany'; // Adjust the import path as necessary
 import { useNavigate } from 'react-router-dom'; 
+import { Spin, Flex } from 'antd'; 
+import { LoadingOutlined } from '@ant-design/icons';
+
 function CompanyItem() {
     const { companyId } = useParams();
     const [company, setCompany] = useState({});
@@ -17,11 +20,12 @@ function CompanyItem() {
             }
         };
         fetchCompany();
-    }, []);
-    console.log(company);
+    }, [companyId]);
     return (
         <>
-            <div className="company-item">
+            {
+                company.companyName ? (<>
+                    <div className="company-item">
                 <div className="btn-back" onClick={() => { navigate(-1) }}>← Quay lại</div>
                 <br />
 
@@ -51,6 +55,16 @@ function CompanyItem() {
                     </div>
                 </div>
             </footer>
+                </>
+                    ) : (
+                    <>
+                            <Flex align="center" gap="middle" className="fullscreen-spin">
+                                <Spin indicator={<LoadingOutlined spin />} size="large" />
+                            </Flex>
+                    </>
+                    )
+            }
+           
         </>
     );
 }

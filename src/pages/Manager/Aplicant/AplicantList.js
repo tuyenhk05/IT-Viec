@@ -5,6 +5,8 @@ import { Button, Popconfirm, message } from 'antd';
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom'; 
 import { delcv } from '../../../services/dataCv';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Flex } from 'antd';
 import { getCookie } from '../../../helpers/cookie'; 
 
 function AplicantList() {
@@ -28,6 +30,16 @@ function AplicantList() {
         }
         fetchData();
     }, [reload]);
+    if (datacv.length===0 ) {
+        return (
+            <>
+                <Flex align="center" gap="middle" className="fullscreen-spin">
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                </Flex>
+            </>
+
+        )
+    };
     const success = () => {
         messageApi.open({
             type: 'error',

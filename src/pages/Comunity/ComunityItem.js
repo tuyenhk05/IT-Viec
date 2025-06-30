@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { getnew } from '../../services/datanew'; // giả sử bạn có API này
+import { Spin, Flex } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import './comunity.scss';
 
 function NewsItem() {
@@ -20,7 +22,9 @@ function NewsItem() {
             fetchNews();
         }, [comunityId]);
 
-        if (!news) return <div>Đang tải dữ liệu...</div>;
+    if (!news) return <> <Flex align="center" gap="middle" className="fullscreen-spin">
+        <Spin indicator={<LoadingOutlined spin />} size="large" />
+    </Flex></>;
 
     return (
 
